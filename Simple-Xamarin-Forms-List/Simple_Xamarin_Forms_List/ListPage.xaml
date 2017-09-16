@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Simple_Xamarin_Forms_List.ListPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar Placeholder="Search..." TextChanged="SearchBar_OnTextChanged"/>
+            <ListView x:Name="listView" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                        <!--<TextCell Text="{Binding Location}" Detail="{Binding Dates}" TextColor="DeepSkyBlue" DetailColor="DarkGray" />-->
+                            <StackLayout Padding="5">
+                                <Label Text="{Binding Location}" TextColor="Blue" FontSize="20"/>
+                                <Label Text="{Binding Dates}" TextColor="DarkGray" FontSize="15"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
