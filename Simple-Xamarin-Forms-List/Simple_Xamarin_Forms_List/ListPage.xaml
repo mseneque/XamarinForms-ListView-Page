@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar Placeholder="Search..." TextChanged="SearchBar_OnTextChanged"/>
-            <ListView x:Name="listView" HasUnevenRows="True">
+            <ListView x:Name="listView" HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="ListView_OnRefreshing">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

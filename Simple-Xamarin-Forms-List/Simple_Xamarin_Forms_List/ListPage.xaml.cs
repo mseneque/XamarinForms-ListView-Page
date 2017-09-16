@@ -49,5 +49,13 @@ namespace Simple_Xamarin_Forms_List
             listView.ItemsSource = GetHistory(e.NewTextValue);
         }
 
+
+        // Pull to Refresh
+        private void ListView_OnRefreshing(object sender, EventArgs e)
+        {
+            listView.ItemsSource = GetHistory();
+            listView.EndRefresh();
+        }
+
     }
 }
