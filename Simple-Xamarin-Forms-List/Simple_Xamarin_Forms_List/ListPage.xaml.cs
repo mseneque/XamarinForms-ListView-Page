@@ -53,9 +53,28 @@ namespace Simple_Xamarin_Forms_List
         // Pull to Refresh
         private void ListView_OnRefreshing(object sender, EventArgs e)
         {
-            listView.ItemsSource = GetHistory();
+            listView.ItemsSource = GetHistory(searchBar.Text);
+            //searchBar.Text = "";
             listView.EndRefresh();
         }
 
+
+        // Delete history item
+        private void Delete_OnClicked(object sender, EventArgs e)
+        {
+            var history = (sender as MenuItem)?.CommandParameter as History;
+            _history.Remove(history);
+        }
+
+
+        private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var history = e.SelectedItem as History;
+            if (history != null)
+            {
+                var location = history.Location;
+                DisplayAlert("Location", location, "OK");
+            }
+        }
     }
 }
