@@ -1,7 +1,7 @@
 ﻿using Simple_Xamarin_Forms_List.Model;
 using Simple_Xamarin_Forms_List.Services;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +11,6 @@ namespace Simple_Xamarin_Forms_List
     public partial class ListPage : ContentPage
     {
         private SearchService _searchService;
-        private ObservableCollection<History> _history;
 
         public ListPage()
         {
@@ -19,21 +18,25 @@ namespace Simple_Xamarin_Forms_List
 
             InitializeComponent();
 
-            _searchService.GetHistory();
+            DisplayList(_searchService.GetHistory());
+        }
+
+        private void DisplayList(IEnumerable<History> history)
+        {
+            listView.ItemsSource = history;
         }
 
 
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            listView.ItemsSource = _searchService.GetHistory(e.NewTextValue);
+            DisplayList(_searchService.GetHistory(e.NewTextValue));
         }
 
 
         // Pull to Refresh
         private void ListView_OnRefreshing(object sender, EventArgs e)
         {
-            listView.ItemsSource = _searchService.GetHistory(searchBar.Text);
-            //searchBar.Text = "";
+            DisplayList(_searchService.GetHistory(searchBar.Text));
             listView.EndRefresh();
         }
 
@@ -42,7 +45,7 @@ namespace Simple_Xamarin_Forms_List
         private void Delete_OnClicked(object sender, EventArgs e)
         {
             var history = (sender as MenuItem)?.CommandParameter as History;
-            _history.Remove(history);
+            if (history != null) _searchService.DeleteHistory(history.Id);
         }
 
 

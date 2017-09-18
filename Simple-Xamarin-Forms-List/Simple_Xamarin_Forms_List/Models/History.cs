@@ -7,6 +7,7 @@ namespace Simple_Xamarin_Forms_List.Model
 
     public class History
     {
+        public int Id { get; set; }
         public string Suburb { get; set; }
         public StateAbr StateAbr { get; set; }
         public Country Country { get; set; }

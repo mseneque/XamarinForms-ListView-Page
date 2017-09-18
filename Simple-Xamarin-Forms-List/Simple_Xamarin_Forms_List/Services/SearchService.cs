@@ -11,13 +11,37 @@ namespace Simple_Xamarin_Forms_List.Services
         // Sets a mock hardcoded history
         private ObservableCollection<History> _history = new ObservableCollection<History>
         {
-            new History {Country = Country.Austraila, StateAbr = StateAbr.WA, Suburb = "Clarkson", CheckIn = DateTime.Today, CheckOut = DateTime.Today.AddDays(2)},
-            new History {Country = Country.Austraila, StateAbr = StateAbr.WA, Suburb = "Dianella", CheckIn = DateTime.Today.AddDays(3), CheckOut = DateTime.Today.AddDays(6)},
-            new History {Country = Country.Austraila, StateAbr = StateAbr.WA, Suburb = "Claremont", CheckIn = DateTime.Today.AddDays(7), CheckOut = DateTime.Today.AddDays(14)}
+            new History
+            {
+                Id = 1,
+                Country = Country.Austraila,
+                StateAbr = StateAbr.WA,
+                Suburb = "Clarkson",
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today.AddDays(2)
+            },
+            new History
+            {
+                Id = 2,
+                Country = Country.Austraila,
+                StateAbr = StateAbr.WA,
+                Suburb = "Dianella",
+                CheckIn = DateTime.Today.AddDays(3),
+                CheckOut = DateTime.Today.AddDays(6)
+            },
+            new History
+            {
+                Id = 3,
+                Country = Country.Austraila,
+                StateAbr = StateAbr.WA,
+                Suburb = "Claremont",
+                CheckIn = DateTime.Today.AddDays(7),
+                CheckOut = DateTime.Today.AddDays(14)
+            }
         };
 
 
-        // Implements Search
+        // Implements History Search
         public IEnumerable<History> GetHistory(string searchString = null)
         {
             if (string.IsNullOrWhiteSpace(searchString))
@@ -27,5 +51,11 @@ namespace Simple_Xamarin_Forms_List.Services
 
         }
 
+        // Deletes a history
+        public void DeleteHistory(int searchId)
+        {
+            _history.Remove(_history.Single(s => s.Id == searchId));
+        }
 
     }
+}
